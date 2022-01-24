@@ -5,7 +5,7 @@ pipeline {
                  agent any
                     steps {
                          script {
-                             echo 'git status'
+                            sh'git status'
                             }
                         }
             }
