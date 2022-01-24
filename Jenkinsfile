@@ -5,7 +5,7 @@ pipeline {
                  agent any
                     steps {
                          script {
-                             //sh 'git clone https://github.com/SabrinaDib/PetClinic.git'
+                             sh 'mvn test'
                             }
                         }
             }
