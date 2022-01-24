@@ -5,7 +5,7 @@ pipeline {
                  agent any
                     steps {
                          script {
-                            / Get some code from a GitHub repository
+                            // Get some code from a GitHub repository
                             git 'https://github.com/SabrinaDib/PetClinic.git'
                             }
                         }
