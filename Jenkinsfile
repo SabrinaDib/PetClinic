@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {    
-        stage('Start pipe line') 
+        stage('Start pipeline') 
     {
       agent any
       steps 
@@ -12,8 +12,7 @@ pipeline {
          echo ' remove all docker containers'
          sh 'docker ps -aq  | xargs --no-run-if-empty docker rm'
        }
-    }    
-        
+    } 
         stage('cloner repos') {
                  agent any
                     steps {
@@ -24,15 +23,8 @@ pipeline {
                         }
             }
         
-        stage('Build') {
-            steps {
-                
-
-                // Run Maven on a Unix agent.
-                sh "mvn -version"
-            }
-
-        }
+        
+        agent       { docker { image 'maven:3.8.4-jdk-11'  }     }
     
 }
 }
