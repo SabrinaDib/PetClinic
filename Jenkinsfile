@@ -12,7 +12,7 @@ pipeline
     MYSQL_PASSWD_CLOUD= 'France2019@'
   }
  
-    stage('Docker run mysql  ') 
+    stage ('Docker run mysql  ') 
     {
       agent any
       steps 
