@@ -1,7 +1,7 @@
 pipeline {
     agent 
     stages{
-    {    docker { image 'maven:3.8.4-openjdk-11 } 
+    {    docker { image 'maven:3.8.4-openjdk-11' } 
             }
       stages {
         stage('log version info') {
