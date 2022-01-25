@@ -1,7 +1,6 @@
 
 pipeline {
 
-  agent none
   environment 
   {
     MYSQL_SERVER_IP = '192.168.0.145'
