@@ -18,6 +18,16 @@ pipeline {
         }
     }
     stages {
+	stage('Docker run mysql  ') 
+    {
+      agent any
+      steps 
+      {
+          echo 'Lancer un conteneur mysql avec docker'
+          sh 'docker run --name mysql -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=7058 -e MYSQL_DATABASE=petclinic -e MYSQL_USER=petclinic -e MYSQL_PASSWORD=petclinic123 mysql:5.7.8'
+          
+      }
+    }
         stage('Build') { 
             steps {
                 sh 'mvn -B -DskipTests clean package' 
