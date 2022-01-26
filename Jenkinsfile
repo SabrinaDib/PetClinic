@@ -16,8 +16,9 @@ pipeline {
             image 'maven:3.8.4-openjdk-11'  
         }
     }
-    stages {
-	
+    stages {                                                  
+	 stage('Generer image docker de l app avec tomcat-apache')
+    {
       agent any
       steps
       {
@@ -26,5 +27,4 @@ pipeline {
       }
     }
       
-  }
-        
+  }}
