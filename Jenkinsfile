@@ -5,7 +5,7 @@
         registryName = "petclinicregitry"
         //- update your credentials ID after creating credentials for connecting to ACR
         registryCredential = 'petclinic'
-		dockerImage = ''
+	dockerImage = ''
         registryUrl = 'petclinicregitry.azurecr.io'
                     }
     tools { 
