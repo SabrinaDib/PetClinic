@@ -4,7 +4,7 @@
         //once you create ACR in Azure cloud, use that here
         registryName = "petclinicregitry"
         //- update your credentials ID after creating credentials for connecting to ACR
-        registryCredential = 'ACR'
+        registryCredential = 'petclinic'
 		dockerImage = ''
         registryUrl = 'petclinicregitry.azurecr.io'
                     }
