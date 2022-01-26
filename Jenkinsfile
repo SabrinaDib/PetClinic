@@ -1,11 +1,11 @@
- 
- pipeline {
+pipeline {
     agent any
 	environment {
         //once you create ACR in Azure cloud, use that here
         registryName = "PetclinicProjectSabrina"
         //- update your credentials ID after creating credentials for connecting to ACR
         registryCredential = 'ACR'
+		dockerImage = ''
         registryUrl = 'petclinicprojectsabrina.azurecr.io'
                     }
     tools { 
@@ -26,6 +26,14 @@
 			sh 'docker ps'
 			}
 		}
+		 // Stopping Docker containers for cleaner Docker run
+     stage('stop previous containers') {
+         steps {
+            sh 'docker ps -f name=petclinic -q | xargs --no-run-if-empty docker container stop'
+            sh 'docker container ls -a -fname=petclinic -q | xargs -r docker container rm'
+         }
+       }
+
 		stage('test install tomcat'){
 		steps{
 			//sh 'docker run --rm -p 8888:8080 tomcat:9.0-slim'
