@@ -1,6 +1,13 @@
  
  pipeline {
     agent any
+	environment {
+        //once you create ACR in Azure cloud, use that here
+        registryName = "PetclinicProjectSabrina"
+        //- update your credentials ID after creating credentials for connecting to ACR
+        registryCredential = 'ACR'
+        registryUrl = 'petclinicprojectsabrina.azurecr.io'
+                    }
     tools { 
         maven 'M3' 
     }
@@ -26,16 +33,8 @@
 			sh 'docker run -d -p 8888:8080 --name petclinic petclinic_img'
 			}	
 		}
-      agent any
      
-        environment {
-        //once you create ACR in Azure cloud, use that here
-        registryName = "PetclinicProjectSabrina"
-        //- update your credentials ID after creating credentials for connecting to ACR
-        registryCredential = 'ACR'
-        dockerImage = ''
-        registryUrl = 'petclinicprojectsabrina.azurecr.io'
-                    }
+        
 	   stage ('Build Docker image') {
             steps {
                 
