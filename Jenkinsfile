@@ -1,30 +1,42 @@
 pipeline {
+    agent any
+    tools { 
+        maven 'M3' 
+    }
+        stages {       
+            stage('build mvn') {
 
-  environment 
-  {
-    MYSQL_SERVER_IP = '192.168.0.145'
-    MYSQL_USER= 'petclinic'
-    MYSQL_PASSWD= 'petclinic123'
-    
-    MYSQL_SERVER_IP_CLOUD = 'azmysqlpetclinic.mysql.database.azure.com'
-    MYSQL_USER_CLOUD= 'sabrinapetclinic'
-    MYSQL_PASSWD_CLOUD= 'France2019@'
-  }
- 
-    agent {
-        docker {
-            image 'maven:3.8.4-openjdk-11'  
-        }
-    }
-    stages {                                                  
-	 stage('Generer image docker de l app avec tomcat-apache')
-    {
-      agent any
-      steps
-      {
-        echo 'Generating docker image'
-        sh 'docker build -t petclinic:latest .'
-      }
-    }
-      
-  }}
+                   steps {
+                       
+                             sh 'mvn clean'
+                             
+                            } 
+                       
+              }
+	     stage('cmd docker') {
+		 steps{
+			sh 'docker ps'
+			}
+		}
+		stage('test install tomcat'){
+		steps{
+			sh 'docker run --rm -p 8888:8080 tomcat:9.0'
+			}	
+		}
+       
+/*         stage("build and SonarQube analysis") {
+            steps {
+              withSonarQubeEnv('sonarqube') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+         }
+          stage("Quality Gate") {
+            steps {
+              timeout(time: 3, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }       
+*/   }
+}
