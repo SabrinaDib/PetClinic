@@ -1,12 +1,12 @@
-pipeline {
+  pipeline {
     agent any
 	environment {
         //once you create ACR in Azure cloud, use that here
-        registryName = "PetclinicProjectSabrina"
+        registryName = "petclinicregitry"
         //- update your credentials ID after creating credentials for connecting to ACR
         registryCredential = 'ACR'
 		dockerImage = ''
-        registryUrl = 'petclinicprojectsabrina.azurecr.io'
+        registryUrl = 'petclinicregitry.azurecr.io'
                     }
     tools { 
         maven 'M3' 
