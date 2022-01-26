@@ -1,4 +1,4 @@
-  pipeline {
+pipeline {
     agent any
 	environment {
         //once you create ACR in Azure cloud, use that here
@@ -64,7 +64,7 @@
 	    stage('Docker Run') {
      steps{
          script {
-                sh 'docker run -d -p 8096:5000 --rm --name mypythonContainer ${registryUrl}/${registryName}'
+                sh 'docker run -d -p 8096:5000 --rm --name petclinic ${registryUrl}/${registryName}'
             }
       }
     }
