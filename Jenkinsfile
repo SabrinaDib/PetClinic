@@ -8,7 +8,7 @@ pipeline {
 
                    steps {
                        
-                             sh 'mvn clean package '
+                             sh 'mvn clean package'
                              
                             } 
                        
@@ -20,10 +20,12 @@ pipeline {
 		}
 		stage('test install tomcat'){
 		steps{
-			sh 'docker run -t tomcat'
+			//sh 'docker run --rm -p 8888:8080 tomcat:9.0-slim'
+			sh 'docker build -t petclinic_img .'
+			sh 'docker run -d -p 8888:8080 --name petclinic petclinic_img'
 			}	
 		}
-       
+
 /*         stage("build and SonarQube analysis") {
             steps {
               withSonarQubeEnv('sonarqube') {
