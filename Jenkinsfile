@@ -26,13 +26,6 @@ pipeline {
 			sh 'docker ps'
 			}
 		}
-		 // Stopping Docker containers for cleaner Docker run
-     stage('stop previous containers') {
-         steps {
-            sh 'docker ps -f name=petclinic -q | xargs --no-run-if-empty docker container stop'
-            sh 'docker container ls -a -fname=petclinic -q | xargs -r docker container rm'
-         }
-       }
 
 		stage('test install tomcat'){
 		steps{
@@ -61,17 +54,20 @@ pipeline {
         }
       }
     }
-	    stage('Docker Run') {
+	    // Stopping Docker containers for cleaner Docker run
+     stage('stop previous containers') {
+         steps {
+            sh 'docker ps -f name=petclinic -q | xargs --no-run-if-empty docker container stop'
+            sh 'docker container ls -a -fname=petclinic -q | xargs -r docker container rm'
+         }
+       }
+		
+		stage('Docker Run') {
      steps{
          script {
                 sh 'docker run -d -p 8096:5000 --rm --name petclinic ${registryUrl}/${registryName}'
             }
       }
     }
-	
-	
-	
-	
-	
-	
-	}}
+	}
+	}
