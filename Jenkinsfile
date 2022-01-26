@@ -1,4 +1,5 @@
-pipeline {
+ 
+ pipeline {
     agent any
     tools { 
         maven 'M3' 
@@ -25,20 +26,31 @@ pipeline {
 			sh 'docker run -d -p 8888:8080 --name petclinic petclinic_img'
 			}	
 		}
-
-/*         stage("build and SonarQube analysis") {
+      agent any
+     
+        environment {
+        //once you create ACR in Azure cloud, use that here
+        registryName = "PetclinicProjectSabrina"
+        //- update your credentials ID after creating credentials for connecting to ACR
+        registryCredential = 'ACR'
+        dockerImage = ''
+        registryUrl = 'petclinicprojectsabrina.azurecr.io'
+                    }
+	   stage ('Build Docker image') {
             steps {
-              withSonarQubeEnv('sonarqube') {
-                sh 'mvn clean package sonar:sonar'
-              }
+                
+                script {
+                    dockerImage = docker.build registryName
+                }
             }
-         }
-          stage("Quality Gate") {
-            steps {
-              timeout(time: 3, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
-              }
+        }
+	    // Uploading Docker images into ACR
+         stage('Upload Image to ACR') {
+           steps{   
+             script {
+                 docker.withRegistry( "http://${registryUrl}", registryCredential ) {
+                 dockerImage.push()
             }
-          }       
-*/   }
-}
+        }
+      }
+    }}}
