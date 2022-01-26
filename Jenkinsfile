@@ -17,17 +17,7 @@ pipeline {
         }
     }
     stages {
-	/*stage('Docker run mysql  ')*/ 
-    
-      agent any
-      steps 
-      {
-          echo 'Lancer un conteneur mysql avec docker'
-         
-          
-      }
-    
-	{
+	
       agent any
       steps
       {
@@ -38,4 +28,3 @@ pipeline {
       
         }
         
-    }
