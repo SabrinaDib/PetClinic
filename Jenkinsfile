@@ -4,8 +4,8 @@
         //once you create ACR in Azure cloud, use that here
         registryName = "petclinicregitry"
         //- update your credentials ID after creating credentials for connecting to ACR
-        registryCredential = 'petclinic'
-	dockerImage = ''
+        registryCredential = 'Petclinic'
+		dockerImage = ''
         registryUrl = 'petclinicregitry.azurecr.io'
                     }
     tools { 
@@ -60,4 +60,18 @@
             }
         }
       }
-    }}}
+    }
+	    stage('Docker Run') {
+     étapes{
+         script {
+                sh 'docker run -d -p 8096:5000 --rm --name mypythonContainer ${registryUrl}/${registryName}'
+            }
+      }
+    }
+	
+	
+	
+	
+	
+	
+	}}
