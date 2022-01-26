@@ -1,4 +1,3 @@
-
 pipeline {
 
   environment 
@@ -19,7 +18,7 @@ pipeline {
     }
     stages {
 	/*stage('Docker run mysql  ')*/ 
-    {
+    
       agent any
       steps 
       {
@@ -27,7 +26,7 @@ pipeline {
          
           
       }
-    }
+    
 	{
       agent any
       steps
