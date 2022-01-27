@@ -57,7 +57,7 @@ pipeline {
 		stage('Docker Run') {
      steps{
          script {
-                sh 'docker run -d -p 8096:5000 --rm --name petclinic ${registryUrl}/${registryName}'
+                sh 'docker run -d -p 8097:5000 --rm --name petclinic ${registryUrl}/${registryName}'
             }
       }
     }
