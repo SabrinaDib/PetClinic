@@ -512,7 +512,7 @@
                 <jpa.database>MYSQL</jpa.database>
                 <jdbc.driverClassName>com.mysql.cj.jdbc.Driver</jdbc.driverClassName>
                 <jdbc.url><![CDATA[jdbc:mysql://azpetclincmysql.mysql.database.azure.com:3306/petclinic?useUnicode=true&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=CET]]></jdbc.url>
-                <jdbc.username>azsabrinapetclinic/jdbc.username>
+                <jdbc.username>azsabrinapetclinic</jdbc.username>
                 <jdbc.password>France2019@</jdbc.password>
             </properties>
             <dependencies>
