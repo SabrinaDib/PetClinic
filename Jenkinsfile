@@ -20,9 +20,7 @@ pipeline {
 			stage('cmd docker') {
 		       steps{
 			      sh 'docker ps'
-				    }            }
-	        
-			        }			
+				    }            }			
 
 		   stage('test install tomcat'){
 		     steps{	
@@ -64,4 +62,4 @@ pipeline {
       }
     }
 	}
-	
+	}
