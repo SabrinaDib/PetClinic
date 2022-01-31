@@ -1,25 +1,42 @@
-stages {       
+pipeline {
+    agent any
+    tools { 
+        maven 'M3' 
+    }
+
+    environment {
+	//var ENV ACR
+        registryName = "petclinicweb"
+        registryCredential = 'Petclinic'
+        registryUrl = 'petclinicregitry.azurecr.io'
+    // var Env Mysql
+	    MYSQL_PASSWORD = 'France2019@'
+	    MYSQL_USERNAME = 'azsabrinapetclinic'
+	    MYSQL_SERVER_IP = 'azpetclincmysql.mysql.database.azure.com'
+		dockerImage = ''
+	}	
+    stages {       
         stage('build mvn') {
             steps {      
                 sh 'mvn clean '        
             }        
         }
      
-		stage("Maven build") {
+		stage("build and SonarQube analysis") {
             steps {
-				withSonarQubeEnv(installationName: 'sonarqube') {
+					sh 'mvn clean install'
 					sh 'mvn clean install package org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
 					echo 'mvn -Denv.MYSQL_SERVER_IP=${MYSQL_SERVER_IP} -Denv.MYSQL_USERNAME=${MYSQL_USERNAME} -Denv.MYSQL_PASSWORD=${MYSQL_PASSWORD} package -P MySQL'
 					}
                                               }
-							 }
-		//SonarQube analyse  
-		stage("SonarQube Quality Gate") {
+		 
+		stage("Quality Gate") {
             steps {
 				timeout(time: 10, unit: 'MINUTES') {
 					waitForQualityGate abortPipeline: true
 				}
             }
+        }       
       
        // Stopping Docker containers for cleaner Docker run
         stage('stop previous containers') {
@@ -54,4 +71,4 @@ stages {
 			}
 		}
 	}
-}
+
