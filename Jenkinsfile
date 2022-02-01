@@ -6,7 +6,7 @@ pipeline {
 
     environment {
 	//var ENV ACR
-        registryName = "petclinicweb"
+        registryName = "petclinicregitry"
         registryCredential = 'Petclinic'
         registryUrl = 'petclinicregitry.azurecr.io'
     // var Env Mysql
